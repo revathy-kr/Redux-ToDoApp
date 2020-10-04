@@ -1,6 +1,7 @@
 import { TodoActionTypes } from "../const/actionTypes";
 
 const todos = (state = [], action) => {
+  debugger
   switch (action.type) {
     case TodoActionTypes.ADD_TODO:
       return [
@@ -17,8 +18,8 @@ const todos = (state = [], action) => {
 
     case TodoActionTypes.TOGGLE_TODO:
       console.log(state, action);
-      // console.log(state.map(todo =>
-      //   todo.id === action.id ? { ...todo, completed: !todo.completed } : todo));
+      console.log(state.map(todo =>
+        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo));
       
       return state.map(todo =>
         todo.id === action.id ? { ...todo, completed: !todo.completed } : todo

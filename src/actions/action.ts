@@ -1,7 +1,9 @@
+import { TodoActionTypes } from "../const/actionTypes";
+
 let nextToDoId = 0;
 
 export const addToDo = (text: string) => ({
-  type: 'ADD_TODO',
+  type: TodoActionTypes.ADD_TODO,
   id: nextToDoId++,
   text
 });
@@ -10,7 +12,7 @@ export const setVisibilityFilter = (filter: string) => {
   console.log(filter);
 
   return ({
-    type: 'SET_VISBILITY_FILTER',
+    type: TodoActionTypes.SET_VISIBILITY_FILTER,
     // id: nextToDoId++,
     filter
   })
@@ -21,7 +23,7 @@ export const toggleToDo = (id: number) => {
 
   return (
     {
-      type: 'TOGGLE_TODO',
+      type: TodoActionTypes.TOGGLE_TODO,
       id
     })
 };
