@@ -2,7 +2,7 @@ import * as React from 'react';
 import Display from './Display';
 import { toggleToDo } from '../actions/action';
 import { connect } from 'react-redux';
-import { Filter } from '../const/filterTypes';
+import Filter from '../const/filterTypes';
 
 class ToDo extends React.Component<IToDoProps, {}> {
   constructor(props) {
@@ -14,11 +14,15 @@ class ToDo extends React.Component<IToDoProps, {}> {
   //   // this.props.getAllTodos();
   // }
 
-  // public componentDidUpdate(prevProps, prevState) {
-  //   if (this.props.todos.items !== prevProps.todos.items) {
-  //     this.props.getAllTodos();
-  //   }
-  // }
+  public componentDidUpdate(prevProps, prevState) {
+    console.log(this.props.todos);
+
+    if (this.props.todos.items !== prevProps.todos.items) {
+      console.log(this.props.todos);
+      
+      // this.props.getAllTodos();
+    }
+  }
 
   public render() {
     return (
@@ -26,11 +30,11 @@ class ToDo extends React.Component<IToDoProps, {}> {
         <ul style={{ display: "table" }}>
           {this.props.todos && this.props.todos.map(todo =>
             <Display
-              key={todo.ID}
+              key={todo.id}
               {...todo}
-              onClick={() => this.props.toggleTodo(todo)}
-              text={todo.Title}
-              ID={todo.ID}
+              onClick={() => this.props.toggleTodo(todo.id)}
+              text={todo.text}
+              id={todo.id}
               delete={this.props.deleteToDo}
             />
           )}
@@ -45,18 +49,20 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toggleTodo: todo => dispatch(toggleToDo(todo)),
-  getAllTodos: dispatch(),
+  toggleTodo: id => dispatch(toggleToDo(id)),
+  // getAllTodos: dispatch(),
   deleteToDo: (Id) => dispatch()
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ToDo);
 
 const todosSelector = (state) => {
-  if (state.visibilityFilter === Filter.SHOW_ACTIVE) {
-    return state.todos.filter((todo: any) => todo.Completed === false);
+  console.log("156456",state.visibilityFilter);
+
+  if (state.visibilityFilter === Filter.SHOW_ACTIVE) {    
+    return state.todos.filter((todo: any) => todo.completed === false);
   } else if (state.visibilityFilter === Filter.SHOW_COMPLETED) {
-    return state.todos.filter((todo: any) => todo.Completed === true);
+    return state.todos.filter((todo: any) => todo.completed === true);
   }
   return state.todos;
 };
@@ -64,7 +70,7 @@ const todosSelector = (state) => {
 export interface IToDoProps {
   description?: string;
   todos?: any;
-  toggleTodo?: (todos: any) => void;
-  getAllTodos?: () => void;
-  deleteToDo?: (ID: number) => void;
+  toggleTodo: (id: number) => void;
+  // getAllTodos?: () => void;
+  deleteToDo?: (id: number) => void;
 }

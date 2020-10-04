@@ -8,12 +8,21 @@ const todos = (state = [], action) => {
         {
           id: action.id,
           text: action.text,
-          Completed: false
+          completed: false
         }
       ];
 
     case TodoActionTypes.GET_TODO:
       return action.payload;
+
+    case TodoActionTypes.TOGGLE_TODO:
+      console.log(state, action);
+      // console.log(state.map(todo =>
+      //   todo.id === action.id ? { ...todo, completed: !todo.completed } : todo));
+      
+      return state.map(todo =>
+        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo
+      )
 
     case TodoActionTypes.UPDATE_TODO:
       return state.map(item =>

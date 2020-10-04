@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addToDo } from '../actions/action';
 
-const AddToDo = (props) => {
-  let input;
+const AddToDo = (props: any) => {
+  let input: any;
   return (
     <div>
       <form onSubmit={e => {

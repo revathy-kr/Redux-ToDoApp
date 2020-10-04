@@ -1,9 +1,9 @@
 import React from 'react';
 import { setVisibilityFilter } from '../actions/action';
 import { connect } from 'react-redux';
-import { Filter } from '../const/filterTypes';
+import Filter from '../const/filterTypes';
 
-class Footer extends React.Component<IFooterProps>{
+class Footer extends React.Component<IFooterProps, {}>{
   constructor(props) {
     super(props);
   }
@@ -13,7 +13,7 @@ class Footer extends React.Component<IFooterProps>{
         <span style={{ marginLeft: "10px" }}>Show: </span>
         <button onClick={() => this.props.filterList(Filter.SHOW_ALL)} style={{ marginLeft: '2px' }}> All</button>
         <button onClick={() => this.props.filterList(Filter.SHOW_ACTIVE)} style={{ marginLeft: '2px' }}> Active</button>
-        <button onClick={() => this.props.filterList(Filter.SHOW_COMPLETED)} style={{ marginLeft: '2px' }}> Completed</button>
+        <button onClick={() => this.props.filterList(Filter.SHOW_COMPLETED)} style={{ marginLeft: '2px' }}> completed</button>
       </div>
     );
   }

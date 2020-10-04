@@ -8,11 +8,11 @@ class Display extends React.Component<IDisplayToDoProps, IDisplayToDoState> {
   public render() {
     return (
       <div style={{ display: "table-row" }}>
-      <li>
+      <li key={this.props.id}>
         <span onClick={this.props.onClick}
           style={{
             display: "table-cell",
-            textDecoration: this.props.Completed ? 'line-through' : 'none'
+            textDecoration: this.props.completed ? 'line-through' : 'none'
           }}>
           {this.props.text}
         </span>
@@ -36,9 +36,9 @@ export default Display;
 
 export interface IDisplayToDoProps {
   onClick: () => void;
-  Completed?: boolean;
-  text?: string;
-  ID: number;
+  completed?: boolean;
+  text: string;
+  id: number;
   delete: (Id) => void;
 }
 
